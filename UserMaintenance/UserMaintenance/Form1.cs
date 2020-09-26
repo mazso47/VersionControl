@@ -22,6 +22,7 @@ namespace UserMaintenance
 
             button1.Text = Resource.Add;
             button2.Text = Resource.Save;
+            button3.Text = Resource.Delete;
 
             listBox1.DataSource = users;
             listBox1.ValueMember = "ID";
@@ -56,9 +57,14 @@ namespace UserMaintenance
                     sw.Write(u.ID);
                     sw.Write(";");
                     sw.Write(u.FullName);
-                    sw.WriteLine(); // Ez a sor az alábbi módon is írható: sr.Write("\n");
+                    sw.WriteLine();
                 }
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            users.Remove((User)listBox1.SelectedItem);
         }
     }
 }

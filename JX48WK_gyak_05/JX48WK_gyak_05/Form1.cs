@@ -99,8 +99,8 @@ namespace JX48WK_gyak_05
                     i++;
                 }
                
-              }
             }
         }
     }
+}
 

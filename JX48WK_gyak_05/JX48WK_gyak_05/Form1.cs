@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace JX48WK_gyak_05
         PortfolioEntities context = new PortfolioEntities();
         List<Tick> Ticks;
         List<PortfolioItem> Portfolio = new List<PortfolioItem>();
+        List<decimal> mentes = new List<decimal>();
        
         public Form1()
         {
@@ -42,6 +44,7 @@ namespace JX48WK_gyak_05
                                       select x)
                                         .ToList();
             MessageBox.Show(nyereségekRendezve[nyereségekRendezve.Count() / 5].ToString());
+            mentes = nyereségekRendezve;
         }
 
         private void CreatePortfolio()
@@ -67,5 +70,37 @@ namespace JX48WK_gyak_05
             }
             return value;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.InitialDirectory = Application.StartupPath;
+            sfd.AddExtension = true;
+            sfd.Filter = "Comma Seperated Values (*.csv)|*.csv";
+            sfd.DefaultExt = "csv";
+
+            if (sfd.ShowDialog() != DialogResult.OK) return;
+
+            using (StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8))
+            {
+                int i = 0;
+
+                sw.Write("Időszak");
+                sw.Write(";");
+                sw.Write("Nyereség");
+                sw.WriteLine();
+                foreach (var n in mentes)
+                {
+                    sw.Write(i);
+                    sw.Write(";");
+                    sw.Write(n);
+                    sw.WriteLine();
+                    i++;
+                }
+               
+              }
+            }
+        }
     }
-}
+

@@ -65,6 +65,9 @@ namespace JX48WK_gyak_06
                 if (unit != 0)
                     rate.Value = value / unit;
 
+                if (childElement == null)
+                    continue;
+
                 chartRateData.DataSource = Rates;
 
                 var series = chartRateData.Series[0];
@@ -121,7 +124,7 @@ namespace JX48WK_gyak_06
             };
 
 
-            var response = mnbService.GetCurrencies();
+            var response = mnbService.GetCurrenciesRequest(request);
 
             
             var result = response.GetCurrenciesResult;

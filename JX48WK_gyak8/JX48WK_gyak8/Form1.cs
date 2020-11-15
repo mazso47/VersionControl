@@ -92,5 +92,15 @@ namespace JX48WK_gyak8
                 return;
             button.BackColor = colorPicker.Color;
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory
+            {
+                boxColor = button5.BackColor,
+                ribbonColor = button6.BackColor
+            };
+
+        }
     }
 }
